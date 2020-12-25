@@ -17,26 +17,9 @@ class MainActivity : AppCompatActivity() {
 
         //flow sample
 
-//        findViewById<Button>(R.id.button_show_fragment).setOnClickListener {
-//            supportFragmentManager.commitNow {
-//                replace<FlowFragment>(R.id.container)
-//                setReorderingAllowed(true)
-//            }
-//        }
-//
-//        findViewById<Button>(R.id.button_to_stack).setOnClickListener {
-//            supportFragmentManager.commit {
-//                replace<EmptyFragment>(R.id.container)
-//                setReorderingAllowed(true)
-//                addToBackStack(null)
-//            }
-//        }
-
-        //rx sample
-
         findViewById<Button>(R.id.button_show_fragment).setOnClickListener {
             supportFragmentManager.commitNow {
-                replace<RxFragment>(R.id.container)
+                replace<FlowFragment>(R.id.container)
                 setReorderingAllowed(true)
             }
         }
@@ -48,5 +31,22 @@ class MainActivity : AppCompatActivity() {
                 addToBackStack(null)
             }
         }
+
+        //rx sample
+
+//        findViewById<Button>(R.id.button_show_fragment).setOnClickListener {
+//            supportFragmentManager.commitNow {
+//                replace<RxFragment>(R.id.container)
+//                setReorderingAllowed(true)
+//            }
+//        }
+//
+//        findViewById<Button>(R.id.button_to_stack).setOnClickListener {
+//            supportFragmentManager.commit {
+//                replace<EmptyFragment>(R.id.container)
+//                setReorderingAllowed(true)
+//                addToBackStack(null)
+//            }
+//        }
     }
 }
