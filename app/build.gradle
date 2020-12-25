@@ -46,6 +46,11 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
     implementation "androidx.paging:paging-runtime-ktx:3.0.0-alpha11"
     implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
+
+    implementation 'com.uber.autodispose:autodispose-android-ktx:1.2.0'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents-ktx:1.2.0'
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

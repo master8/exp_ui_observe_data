@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.master8.expuiobservedata.R
+import com.uber.autodispose.AutoDispose.autoDisposable
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class RxFragment : Fragment() {
 
@@ -19,11 +22,6 @@ class RxFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.e("mv8", "onCreate")
         super.onCreate(savedInstanceState)
-
-        viewModel.data.subscribe {
-//            textView.text = "n $it"
-            Log.e("mv8", "n ${it}")
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +46,18 @@ class RxFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
     }
 
+    private val provider = AndroidLifecycleScopeProvider.from(this)
+
     override fun onStart() {
         Log.e("mv8", "onStart")
         super.onStart()
+        viewModel.data
+            .observeOn(AndroidSchedulers.mainThread())
+            .`as`(autoDisposable(provider))
+            .subscribe {
+                textView.text = "n $it"
+                Log.e("mv8", "n ${it}")
+            }
     }
 
     override fun onResume() {
