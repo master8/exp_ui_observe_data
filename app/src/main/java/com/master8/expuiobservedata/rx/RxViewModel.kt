@@ -9,6 +9,6 @@ class RxViewModel : ViewModel() {
         Log.e("mv8", "view model init")
     }
 
-    val data = loadStubData()
+    val stableFlowable = loadStubData().asStableFlowable()
 }
 

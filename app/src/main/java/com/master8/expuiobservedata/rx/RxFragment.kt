@@ -9,20 +9,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.master8.expuiobservedata.R
-import com.uber.autodispose.AutoDispose.autoDisposable
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 class RxFragment : Fragment() {
 
     private val viewModel by viewModels<RxViewModel>()
 
     private lateinit var textView: TextView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e("mv8", "onCreate")
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -33,8 +25,26 @@ class RxFragment : Fragment() {
             }
     }
 
+    override fun onStart() {
+        Log.e("mv8", "onStart")
+        super.onStart()
+
+        viewModel.stableFlowable
+            .subscribe(lifecycle) {
+                runOnUIThread {
+                    textView.text = "n $it"
+                    Log.e("mv8", "n ${it}")
+                }
+            }
+    }
+
 
     //Logs only
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.e("mv8", "onCreate")
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.e("mv8", "onViewCreated")
@@ -44,20 +54,6 @@ class RxFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.e("mv8", "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
-    }
-
-    private val provider = AndroidLifecycleScopeProvider.from(this)
-
-    override fun onStart() {
-        Log.e("mv8", "onStart")
-        super.onStart()
-        viewModel.data
-            .observeOn(AndroidSchedulers.mainThread())
-            .`as`(autoDisposable(provider))
-            .subscribe {
-                textView.text = "n $it"
-                Log.e("mv8", "n ${it}")
-            }
     }
 
     override fun onResume() {
