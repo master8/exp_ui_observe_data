@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.master8.expuiobservedata.R
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class FlowFragment : Fragment() {
 
@@ -38,9 +40,13 @@ class FlowFragment : Fragment() {
         Log.e("mv8", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.stableFLow.collect(viewLifecycleOwner.lifecycleScope) {
-            textView.text = "n $it"
-            Log.e("mv8", "n ${it}")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.stableFLow
+                .connectTo(viewLifecycleOwner.lifecycleScope)
+                .collect {
+                    textView.text = "n $it"
+                    Log.e("mv8", "n ${it}")
+                }
         }
     }
 
