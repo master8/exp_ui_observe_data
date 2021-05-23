@@ -9,6 +9,7 @@ class FlowViewModel : ViewModel() {
         Log.e("mv8", "view model init")
     }
 
-    val stableFLow = loadStubData().asStableFlow()
+    val stableFLow = loadStubData()
+        .asStableFlow()
 }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.master8.expuiobservedata.R
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class FlowFragment : Fragment() {
 
-    private val viewModel by viewModels<FlowViewModel>()
+    private val viewModel by activityViewModels<FlowViewModel>()
 
     private lateinit var textView: TextView
 

@@ -24,6 +24,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        findViewById<Button>(R.id.button_show_fragment2).setOnClickListener {
+            supportFragmentManager.commitNow {
+                replace<FlowFragment>(R.id.container2)
+                setReorderingAllowed(true)
+            }
+        }
+
         findViewById<Button>(R.id.button_to_stack).setOnClickListener {
             supportFragmentManager.commit {
                 replace<EmptyFragment>(R.id.container)

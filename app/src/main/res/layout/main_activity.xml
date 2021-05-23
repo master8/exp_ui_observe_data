@@ -13,6 +13,12 @@
         android:text="show fragment"/>
 
     <Button
+        android:id="@+id/button_show_fragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show fragment2"/>
+
+    <Button
         android:id="@+id/button_to_stack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +28,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:context=".MainActivity" />
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         tools:context=".MainActivity" />
 </LinearLayout>
