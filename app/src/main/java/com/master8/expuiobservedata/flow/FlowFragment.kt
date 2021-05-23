@@ -20,11 +20,6 @@ class FlowFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.e("mv8", "onCreate")
         super.onCreate(savedInstanceState)
-
-        viewModel.stableFLow.collect(lifecycleScope) {
-            textView.text = "n $it"
-            Log.e("mv8", "n ${it}")
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +37,11 @@ class FlowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.e("mv8", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.stableFLow.collect(viewLifecycleOwner.lifecycleScope) {
+            textView.text = "n $it"
+            Log.e("mv8", "n ${it}")
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
