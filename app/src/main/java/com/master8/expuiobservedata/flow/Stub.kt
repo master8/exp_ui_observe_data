@@ -10,10 +10,10 @@ fun loadStubData(): Flow<Int> = flow<Int> {
 //    delay(5000)
 
     while (true) {
+        delay(5000)
         emit(i)
         Log.e("mv8", "e $i")
 
-        delay(1000)
         i++
     }
 }

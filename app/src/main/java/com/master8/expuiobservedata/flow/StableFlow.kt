@@ -2,7 +2,6 @@ package com.master8.expuiobservedata.flow
 
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 class StableFLow<T>(
     private val dataFlow: Flow<T>
@@ -12,16 +11,12 @@ class StableFLow<T>(
 
     fun collect(lifecycleScope: LifecycleCoroutineScope, action: suspend (value: T) -> Unit) {
         lifecycleScope.launchWhenStarted {
-            launch {
-                dataFlow.collect { _stateFlow.value = it }
-            }
+            dataFlow.collect { _stateFlow.value = it }
         }
 
         lifecycleScope.launchWhenStarted {
-            launch {
-                _stateFlow.filterNotNull()
-                    .collect(action)
-            }
+            _stateFlow.filterNotNull()
+                .collect(action)
         }
     }
 }
